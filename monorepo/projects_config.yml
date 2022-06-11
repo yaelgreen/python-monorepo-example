@@ -1,0 +1,20 @@
+services:
+  service-a:
+    path: projects/service-a
+    deps:
+      - lib-c
+      - lib-d
+
+  service-b:
+    path: projects/service-b
+    deps:
+      - lib-d
+
+libs:
+  lib-c:
+    path: libs/lib-c
+    deps: []
+
+  lib-d:
+    path: libs/lib-d
+    deps: []

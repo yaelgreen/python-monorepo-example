@@ -1,0 +1,8 @@
+{% for project in projects %}
+{{ project.name }}:
+  trigger:
+    include: {{ project.path }}/.gitlab-ci.yml
+    strategy: depend
+  except:
+    - pipelines
+{% endfor %}

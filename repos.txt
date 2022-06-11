@@ -1,0 +1,5 @@
+git@github.com:yaelgreen/service-a.git service-a
+git@github.com:yaelgreen/service-b.git service-b
+
+git@github.com:yaelgreen/lib-c.git lib-c
+git@github.com:yaelgreen/lib-d.git lib-d

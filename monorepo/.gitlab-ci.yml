@@ -1,0 +1,29 @@
+stages:
+  - prepare
+  - projects
+
+generate:
+  image: python:3.8
+  stage: prepare
+  before_script:
+    - apt update && apt install git -y
+    - mkdir artifacts
+    - pip install jinja2
+    - pip install pyyaml
+  script:
+    - echo $CI_COMMIT_REF_NAME
+    - echo $API_GLOBAL_TOKEN
+    - git clone -b "${CI_COMMIT_REF_NAME}" http://oauth2:${API_GLOBAL_TOKEN}@imugit.imubit.com/imubit-dlpc/product/dlpc.git
+    - cd dlpc
+    - python generate_ci_file.py ../artifacts
+  artifacts:
+    paths:
+      - artifacts/
+
+projects:
+  stage: projects
+  trigger:
+    strategy: depend
+    include:
+      - artifact: artifacts/generated_ci.yml
+        job: generate
